@@ -14,19 +14,20 @@ spec:
     spec:
       containers:
         - name: backend
-          image: devsnice/arch:latest
+          image: devsnice/arch:v1-health
           ports:
-            - containerPort: 8080
+            - name: backend-port
+              containerPort: 8080
           livenessProbe:
             httpGet:
-              port: 8080
+              port: backend-port
               path: /
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
           readinessProbe:
             httpGet:
-              port: 8080
-              path: /otusapp/user/health
+              port: backend-port
+              path: /health
             initialDelaySeconds: 10
             periodSeconds: 5

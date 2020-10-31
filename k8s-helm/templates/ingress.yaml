@@ -1,18 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: backend-ingress
+  name: {{ include "backend-chart.fullname" . }}-ingress
+  labels:
+    {{- include "backend-chart.labels" . | nindent 4 }}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - host: arch.homework
+    - host: {{ .Values.nginx.host }}
       http:
         paths:
           - path: /otusapp/(.*?)/(.*)$
             pathType: Prefix
             backend:
               service:
-                name: backend-service
+                name: {{ include "backend-chart.fullname" . }}-service
                 port:
-                  number: 80
+                  number: {{ .Values.service.port }}

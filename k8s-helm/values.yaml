@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: devsnice/arch:v1-health
+
+backend:
+  port: 8080
+
+service:
+  type: NodePort
+  port: 80
+
+nginx:
+  host: arch.homework

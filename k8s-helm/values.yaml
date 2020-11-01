@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: devsnice/arch:v2.21
+  repository: devsnice/arch:v1-crud
 
 backend:
   port: 8080

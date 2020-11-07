@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: devsnice/arch:v1.2-micrometr
+
+backend:
+  port: 8080
+
+service:
+  type: NodePort
+  port: 80
+
+nginx:
+  host: arch.homework
+
+postgresql:
+  enabled: true
+  postgresqlUsername: myuser
+  postgresqlPassword: passwd
+  postgresqlDatabase: myapp
+  service:
+    port: "5432"
+
+metrics:
+  serviceMonitor:
+    enabled: true

@@ -1,0 +1,20 @@
+{{- if .Values.metrics.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "backend-chart.fullname" . }}-monitor
+  labels:
+    {{- include "backend-chart.labels" . | nindent 4 }}-monitor
+spec:
+  jobLabel: {{ include "backend-chart.fullname" . }}
+  namespaceSelector:
+    matchNames:
+    - "{{ $.Release.Namespace }}"
+  selector:
+    matchLabels:
+      {{- include "backend-chart.selectorLabels" . | nindent 6 }}
+  endpoints:
+  - interval: 15s
+    port: backend-service
+    path: /metrics
+{{- end }}

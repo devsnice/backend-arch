@@ -11,6 +11,9 @@ newman run postman-test.json
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prom prometheus-community/kube-prometheus-stack -f prometheus.yaml --atomic
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+
 
 kubectl port-forward service/prom-grafana 9000:80
 kubectl port-forward service/prom-kube-prometheus-stack-prometheus 9090
@@ -18,12 +21,14 @@ http://localhost:9090/service-discovery
 
 admin/prom-operator
 
-while true; do ab -n 50 -c 2 http://192.168.64.4:31559/user/7811b36f-d48a-4b51-b781-c6bf5cc4bb52; sleep 3; done
+while true; do ab -n 500 -c 1 http://arch.homework/otusapp/devsnice/user/7811b36f-d48a-4b51-b781-c6bf5cc4bb52; sleep 10; done
 
 ```
 
 *For debug*
 ```
+minikube addons enable ingress
+
 helm install myapp ./hello-chart --dry-run --debug
 helm uninstall backend
 helm upgrade backend .

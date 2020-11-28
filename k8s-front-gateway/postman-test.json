@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "1fab1660-12bf-d13e-1939-e8e6a5c8b4e5",
+		"name": "CRUD",
+		"description": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40cb83c7-b6a7-4d2b-85f4-e25e648402d7",
+						"exec": [
+							"var responseJson = JSON.parse(responseBody);",
+							"pm.collectionVariables.set(\"userId\", responseJson[\"id\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "test2"
+						},
+						{
+							"key": "firstname",
+							"value": "test"
+						},
+						{
+							"key": "lastname",
+							"value": "test"
+						},
+						{
+							"key": "email",
+							"value": "test"
+						},
+						{
+							"key": "phone",
+							"value": "test"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/devsnice/user/",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"devsnice",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/devsnice/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"devsnice",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "devsnice"
+						},
+						{
+							"key": "firstname",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "lastname",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "phone",
+							"value": "test",
+							"disabled": true
+						},
+						{
+							"key": "kk",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/devsnice/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"devsnice",
+						"user",
+						"{{userId}}"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "devsnice",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID AFTER UPDATE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/devsnice/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"devsnice",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/devsnice/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"devsnice",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TRY TO DELETE SECOND TIME",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/devsnice/user/{{userId}}",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"devsnice",
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e382c417-3aca-4843-a578-2751d70fe985",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fae3e961-feef-4456-8afe-e16f8af3bdc1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "74a91a82-c97e-4919-85a4-27b67b80425a",
+			"key": "userId",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

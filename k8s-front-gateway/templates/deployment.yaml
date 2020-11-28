@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backend-chart.fullname" . }}
+  labels:
+    {{- include "backend-chart.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "backend-chart.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "backend-chart.selectorLabels" . | nindent 8 }}
+      annotations:
+          checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}"  
+          ports:
+            - name: backend-port
+              containerPort: {{ .Values.backend.port }}
+          env:
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "backend-chart.fullname" . }}-secret
+                  key: DATABASE_URI
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "backend-chart.fullname" . }}-secret
+                  key: DATABASE_USER
+            - name: DATABASE_PASSWORD
+              valueFrom:    
+                secretKeyRef:
+                  name: {{ include "backend-chart.fullname" . }}-secret
+                  key: DATABASE_PASSWORD
+          livenessProbe:
+            httpGet:
+              port: backend-port
+              path: /
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: backend-port
+              path: /health
+            initialDelaySeconds: 10
+            periodSeconds: 60
+          

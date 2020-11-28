@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: devsnice/arch:v2-cors
+
+backend:
+  port: 8080
+
+service:
+  type: NodePort
+  port: 80
+
+nginx:
+  host: arch.homework
+
+postgresql:
+  enabled: true
+  postgresqlUsername: myuser
+  postgresqlPassword: passwd
+  postgresqlDatabase: myapp
+  service:
+    port: "5432"
+
+gateway:
+  replicaCount: 1
+  port: 8081
+  image:
+    repository: devsnice/arch:v1.6-gateway
+  service:
+    type: NodePort
+    port: 81

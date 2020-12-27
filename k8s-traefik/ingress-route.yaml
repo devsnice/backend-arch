@@ -1,0 +1,36 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: test
+spec:
+  entryPoints:
+    - web
+  routes:                           # [2]
+  - kind: Rule
+    match: PathPrefix(`/health`)      # [3]
+    middlewares:
+    - name: traefik-forward-auth          
+      namespace: default           
+    services:                       # [8]
+    - kind: Service
+      name: backend-service
+      namespace: default
+      passHostHeader: true
+      port: 80
+      responseForwarding:
+        flushInterval: 1ms
+      strategy: RoundRobin
+      weight: 10
+  - kind: Rule
+    match: PathPrefix(`/_oauth`) || PathPrefix(`/logout`)      # [3]
+    services:             
+    - kind: Service
+      name: traefik-forward-auth
+      namespace: default
+      passHostHeader: true
+      port: 4181
+      responseForwarding:
+        flushInterval: 1ms
+      strategy: RoundRobin
+      weight: 10
+      

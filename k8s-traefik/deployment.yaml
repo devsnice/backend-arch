@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: devsnice/arch:v1-health
+          ports:
+            - name: backend-port
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: backend-port
+              path: /
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: backend-port
+              path: /health
+            initialDelaySeconds: 10
+            periodSeconds: 5

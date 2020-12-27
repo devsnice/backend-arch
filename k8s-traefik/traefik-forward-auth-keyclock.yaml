@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: keyclock-auth
+spec:
+  forwardAuth:
+    address: http://keyclock:8080/
+    authResponseHeaders: 
+      - X-Forwarded-User

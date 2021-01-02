@@ -1,0 +1,30 @@
+replicaCount: 1
+
+backendAuth:
+  port: 8080
+
+backendApp:
+  port: 8081
+
+image:
+  repositoryAuth: devsnice/arch-auth:v0.0.8
+  repositoryApp: devsnice/arch-test:v0.0.1
+
+serviceAuth:
+  type: NodePort
+  port: 80
+ 
+serviceApp:
+  type: NodePort
+  port: 80  
+
+nginx:
+  host: arch.homework.com
+
+postgresql:
+  enabled: true
+  postgresqlUsername: myuser
+  postgresqlPassword: passwd
+  postgresqlDatabase: myapp
+  service:
+    port: "5432"

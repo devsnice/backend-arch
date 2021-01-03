@@ -10,8 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
 spec:
   rules:
-    - host: {{ .Values.nginx.host }}
-      http:
+    - http:
         paths:
           - path: /auth/(.*)
             pathType: Prefix

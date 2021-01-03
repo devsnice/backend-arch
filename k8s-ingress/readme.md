@@ -10,3 +10,6 @@ sudo vim  /etc/host
 kubectl delete service,ingress,deployments,pods --all
 kubectl describe pod/pod_name -> check state of Liveness/Readiness
 ```
+
+kubectl get pods -n kube-system
+kubectl logs -n kube-system ingress-nginx-controller-799c9469f7-cnvqv

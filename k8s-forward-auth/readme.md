@@ -1,7 +1,19 @@
-- problems
+Problems:
 
-1) nginx cannot resolve domain 
-2) if I set nginx domain, I cannot access service by ip?
-3) current workaround -> remove host at all, use app by ip
+1) nginx cannot resolve doma
 
 https://github.com/kubernetes/ingress-nginx/issues/1416
+
+
+TODO:
+1) understand how to define forward-auth host for nginx
+2) draw scheme of work
+
+Tests:
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm dependency update
+helm install backend .
+
+newman run postman-tests.json
+```

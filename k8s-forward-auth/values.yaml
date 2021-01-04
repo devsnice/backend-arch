@@ -7,8 +7,8 @@ backendApp:
   port: 8081
 
 image:
-  repositoryAuth: devsnice/arch-auth:v0.0.9
-  repositoryApp: devsnice/arch-test:v0.0.1
+  repositoryAuth: devsnice/arch-auth:v0.0.11
+  repositoryApp: devsnice/arch-user-client:v0.0.1
 
 serviceAuth:
   type: NodePort

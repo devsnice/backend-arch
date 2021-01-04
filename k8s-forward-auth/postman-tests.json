@@ -1,0 +1,545 @@
+{
+	"info": {
+		"_postman_id": "ad16fd05-ba7d-4d93-b8a6-8920cd1b8012",
+		"name": "FORWARD AUTH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "First user registration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b329d4e-684e-4df2-a3a7-1488af1b752a",
+						"exec": [
+							"var responseJson = JSON.parse(responseBody);",
+							"pm.collectionVariables.set(\"firstUserId\", responseJson[\"id\"]);",
+							"pm.collectionVariables.set(\"firstUsername\", responseJson[\"username\"]);",
+							"pm.collectionVariables.set(\"firstUserPassword\", responseJson[\"password\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{$randomUserName}}\",\n    \"firstName\": \"{{$randomUserName}}\",\n    \"lastName\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"password\": \"{{$randomPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.64.5/auth/registration",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"auth",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get user without login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19dd2edb-c1d3-470e-b93a-fcd7cba02264",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"api",
+						"user",
+						"{{firstUserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to login as First User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d17797e-c290-4868-974b-e2f395f7caab",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"    var responseJson = JSON.parse(responseBody);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{firstUsername}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{firstUserPassword}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.64.5/auth/login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get user after login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c802d36-5e0c-45a0-9d67-8e3d32ca33fd",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"api",
+						"user",
+						"{{firstUserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change first user after login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9fd9f9ae-2088-4abc-ae0d-6d79a92be5b9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var responseJson = JSON.parse(responseBody);",
+							"    console.log(responseJson)",
+							"    pm.expect(responseJson.firstName).to.eql(\"User updated\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"User updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"api",
+						"user",
+						"{{firstUserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Second user registration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "148b738c-9e26-4598-bb88-5511e2f5ef5c",
+						"exec": [
+							"var responseJson = JSON.parse(responseBody);",
+							"pm.collectionVariables.set(\"firstUserId\", responseJson[\"id\"]);",
+							"pm.collectionVariables.set(\"firstUsername\", responseJson[\"username\"]);",
+							"pm.collectionVariables.set(\"firstUserPassword\", responseJson[\"password\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{$randomUserName}}\",\n    \"firstName\": \"{{$randomUserName}}\",\n    \"lastName\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"password\": \"{{$randomPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.64.5/auth/registration",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"auth",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to login as Second User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0046b3e5-4aa2-442b-b0e7-b072f03a93bc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"    var responseJson = JSON.parse(responseBody);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{firstUsername}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{firstUserPassword}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.64.5/auth/login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get first user after login as second",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e561ef0-4731-4cf0-9ee0-ecb03ac76763",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"api",
+						"user",
+						"{{firstUserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get second user after login as second",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ff3888f5-2264-4f60-92f3-e2ceaa74b9f8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"64",
+						"5"
+					],
+					"path": [
+						"api",
+						"user",
+						"{{firstUserId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0bc4ee42-a3aa-4569-996d-7cc6b1b31ed9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "87e97204-7803-49d9-a810-ae0f0606b6ed",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "3926fe72-03e2-45c2-a4ed-893a7025570b",
+			"key": "firstUserId",
+			"value": ""
+		},
+		{
+			"id": "166d2d5a-4701-40bd-a254-e2eddc3c4e28",
+			"key": "firstUsername",
+			"value": ""
+		},
+		{
+			"id": "63a37048-5a8f-4184-b5d6-5d06e16f0270",
+			"key": "firstUserPassword",
+			"value": ""
+		},
+		{
+			"id": "c75fed01-4ffa-442d-935a-6e55c5b37a4f",
+			"key": "secondUserId",
+			"value": ""
+		},
+		{
+			"id": "647a00a5-2b7c-420b-98ab-961ba6e97c71",
+			"key": "secondUsername\n",
+			"value": ""
+		},
+		{
+			"id": "c82b0d6a-151c-4af9-aed8-acdf6b1b558c",
+			"key": "secondUserPassword",
+			"value": ""
+		},
+		{
+			"id": "4af9f051-b08c-449f-8200-53f7cd782eee",
+			"key": "secondUsername",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

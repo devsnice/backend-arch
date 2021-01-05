@@ -41,13 +41,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.64.5/auth/registration",
+					"raw": "http://arch.homework/auth/registration",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"auth",
@@ -83,13 +80,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"raw": "http://arch.homework/api/user/{{firstUserId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"api",
@@ -148,13 +142,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.64.5/auth/login",
+					"raw": "http://arch.homework/auth/login",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"auth",
@@ -197,13 +188,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"raw": "http://arch.homework/api/user/{{firstUserId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"api",
@@ -255,13 +243,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"raw": "http://arch.homework/api/user/{{firstUserId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"api",
@@ -308,13 +293,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.64.5/auth/registration",
+					"raw": "http://arch.homework/auth/registration",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"auth",
@@ -372,13 +354,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.64.5/auth/login",
+					"raw": "http://arch.homework/auth/login",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"auth",
@@ -403,8 +382,8 @@
 					"script": {
 						"id": "3e561ef0-4731-4cf0-9ee0-ecb03ac76763",
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -421,13 +400,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"raw": "http://arch.homework/api/user/{{firstUserId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"api",
@@ -464,18 +440,15 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.64.5/api/user/{{firstUserId}}",
+					"raw": "http://arch.homework/api/user/{{secondUserId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"64",
-						"5"
+						"arch.homework"
 					],
 					"path": [
 						"api",
 						"user",
-						"{{firstUserId}}"
+						"{{secondUserId}}"
 					]
 				}
 			},

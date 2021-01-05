@@ -7,12 +7,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.ingress.kubernetes.io/auth-url: "http://$host/auth/auth"
+    nginx.ingress.kubernetes.io/auth-url: "http://backend-auth-service.default.svc.cluster.local/auth"
     nginx.ingress.kubernetes.io/auth-signin: "http://$host/auth/signin"
     nginx.ingress.kubernetes.io/auth-response-headers: "X-UserId,X-Username"
 spec:
   rules:
-    - http:
+    - host: arch.homework
+      http:
         paths:
           - path: /api/(.*)
             pathType: Prefix

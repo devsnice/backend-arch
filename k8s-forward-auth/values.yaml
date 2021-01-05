@@ -1,4 +1,5 @@
-replicaCount: 1
+replicaAuthCount: 1
+replicaAppCount: 1
 
 backendAuth:
   port: 8080
@@ -19,7 +20,7 @@ serviceApp:
   port: 80  
 
 nginx:
-  host: arch.homework.com
+  host: arch.homework
 
 postgresql:
   enabled: true

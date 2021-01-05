@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       {{- include "backend-chart.selectorLabels" . | nindent 6 }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaAuthCount }}
   template:
     metadata:
       labels:
@@ -38,17 +38,17 @@ spec:
                 secretKeyRef:
                   name: {{ include "backend-chart.fullname" . }}-secret
                   key: DATABASE_PASSWORD
-          # livenessProbe:
-          #   httpGet:
-          #     port: backend-port
-          #     path: /actuator/health
-          #   initialDelaySeconds: 10
-          #   periodSeconds: 5
-          #   timeoutSeconds: 2
-          # readinessProbe:
-          #   httpGet:
-          #     port: backend-port
-          #     path: /actuator/health
-          #   initialDelaySeconds: 10
-          #   periodSeconds: 5
+          livenessProbe:
+            httpGet:
+                port: backend-port
+                path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: backend-port
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 5
           

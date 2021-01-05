@@ -6,7 +6,7 @@
 
 ```
 minikube ip
-sudo vim  /etc/host
+sudo vim  /etc/hosts
 kubectl delete service,ingress,deployments,pods --all
 kubectl describe pod/pod_name -> check state of Liveness/Readiness
 ```

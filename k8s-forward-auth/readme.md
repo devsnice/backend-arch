@@ -1,15 +1,10 @@
-Problems:
-
-1) nginx cannot resolve doma
-
-https://github.com/kubernetes/ingress-nginx/issues/1416
+**Schema:**
+![Schema of work](auth.drawio.svg?raw=true "Schema of work")
 
 
-TODO:
-1) understand how to define forward-auth host for nginx
-2) draw scheme of work
+It works if run deployments without hosts (with host: https://github.com/devsnice/backend-arch/pull/1/files)
 
-Tests:
+**Tests:**
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm dependency update

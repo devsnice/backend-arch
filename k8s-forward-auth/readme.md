@@ -10,9 +10,6 @@ Problems:
 It works if run deployments without hosts
 
 
-TODO:
-1) draw scheme of work
-
 Tests:
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami

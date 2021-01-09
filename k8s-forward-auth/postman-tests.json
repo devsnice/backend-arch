@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4b329d4e-684e-4df2-a3a7-1488af1b752a",
+						"id": "4b329d4e-684e192.168.64.5\n-4df2-a3a7-1488af1b752a",
 						"exec": [
 							"var responseJson = JSON.parse(responseBody);",
 							"pm.collectionVariables.set(\"firstUserId\", responseJson[\"id\"]);",
@@ -65,8 +65,8 @@
 					"script": {
 						"id": "19dd2edb-c1d3-470e-b93a-fcd7cba02264",
 						"exec": [
-							"pm.test(\"Status code is 403\", function () {",
-							"    pm.response.to.have.status(403);",
+							"pm.test(\"Status code is 500\", function () {",
+							"    pm.response.to.have.status(500);",
 							"});"
 						],
 						"type": "text/javascript"
